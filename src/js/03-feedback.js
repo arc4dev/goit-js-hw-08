@@ -1,4 +1,4 @@
-import _, { reduce } from 'lodash';
+import _ from 'lodash';
 
 const form = document.querySelector('.feedback-form');
 const formInputs = form.querySelectorAll('input, textarea');
@@ -32,6 +32,7 @@ const createInputObj = inputs => {
     return obj;
   }, {});
 };
+
 /////////////////////////
 
 setLastFormState();
@@ -51,6 +52,11 @@ form.addEventListener(
   }, 500)
 );
 
-form.addEventListener('submit', () => {
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  console.log(e.target.elements[0].value, e.target.elements[1].value);
+
+  form.reset();
   setLocalStorage(emptyObj);
 });
